@@ -1,3 +1,4 @@
+# How to combine two grafana dashboard
 - Share dashboardA => Export => Save to File => dashboardA.json
 - Share dashboardB => Export => Save to File => dashboardB.json
 - Convert json to yaml:
