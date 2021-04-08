@@ -1,1 +1,15 @@
-# grafana
+- Share dashboardA => Export => Save to File => dashboardA.json
+- Share dashboardB => Export => Save to File => dashboardB.json
+- Convert json to yaml:
+  - Install helm.sh and clone tool from https://github.com/TheProjectAurora/helm-data-tool and execte:
+  - ```./helm-data-tool/bin/helm-data-yaml.sh -f dashboardA.json > dashboardA.yaml```
+  - ```./helm-data-tool/bin/helm-data-yaml.sh -f dashboardB.json > dashboardB.yaml```
+- ```cp dashboardA.yaml dashboardAB.yaml```
+- Copy yaml list values by manually from dashboardB.yaml to dashboardAB.yaml
+  - dashboardB.yaml:panels => dashboardAB.yaml:panels
+  - dashboardB.yaml:templating.list => dashboardAB.yaml:templating.list
+- Change "id:.*" fields to uniq by editing those by manualle.
+  - Command how to get fields that should be changed: ```grep -o " id: .*" dashboardAB.yaml | sort | uniq -d```
+- Convert yaml to json by execute: ```./helm-data-tool/bin/helm-data-json.sh -f dashboardAB.yaml > dashboardAB.json```
+- Import dashboardAB.json dashboard to grafana
+- Made dashboard pretty my manual order graphs to correct place
